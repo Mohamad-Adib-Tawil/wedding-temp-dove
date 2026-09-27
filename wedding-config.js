@@ -61,6 +61,7 @@ window.WEDDING_DATA = {
     sendLabel: 'إرسال التأكيد عبر واتساب',
     whatsappMessage: 'تأكيد حضور حفل زفاف محمد أديب طويل ورزان بطايحي'
   },
+  pageUrl: 'https://mohamad-adib-tawil.github.io/wedding-temp-dove/',
   assets: {
     flightVideo: 'assets/flight.mp4',
     loopVideo: 'assets/loop.mp4',
@@ -132,9 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const compact = (value) => value.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
   const title = encodeURIComponent(data.event.title);
   const location = encodeURIComponent(`${data.venue.name} — ${data.venue.address}`);
-  const details = encodeURIComponent(`رابط الدعوة: ${window.location.href}`);
+  const details = encodeURIComponent(`رابط الدعوة: ${data.pageUrl}`);
+  const pageUrl = document.querySelector('meta[property="og:url"]');
+  if (pageUrl) pageUrl.content = data.pageUrl;
+  const offsetMatch = data.event.date.match(/([+-])(\d{2}):?(\d{2})$/);
+  const offsetMinutes = offsetMatch ? (offsetMatch[1] === '-' ? -1 : 1) * (Number(offsetMatch[2]) * 60 + Number(offsetMatch[3])) : 0;
+  const calendarTime = (value) => new Date(value.getTime() + offsetMinutes * 60000).toISOString().slice(0, 19).replace(/[-:]/g, '');
   const google = document.querySelector('#da3wa-cal .cal-btns a:first-child');
-  if (google) google.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${compact(date)}/${compact(end)}&ctz=${encodeURIComponent(data.event.timezone)}&location=${location}&details=${details}`;
+  if (google) google.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${calendarTime(date)}/${calendarTime(end)}&ctz=${encodeURIComponent(data.event.timezone)}&location=${location}&details=${details}`;
   const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wedding Invitation//AR','BEGIN:VEVENT',`DTSTART:${compact(date)}`,`DTEND:${compact(end)}`,`SUMMARY:${data.event.title}`,`LOCATION:${data.venue.name} — ${data.venue.address}`,'END:VEVENT','END:VCALENDAR'].join('\r\n');
   const apple = document.querySelector('#da3wa-cal .cal-btns a:last-child');
   if (apple) { apple.href = `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`; apple.download = 'wedding-invitation.ics'; }
