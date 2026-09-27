@@ -3,31 +3,7 @@
    لمسة → يحلّق الهديل عبر رواق الورد → يحطّ على النافورة →
    تنبثق الأسماء وتبقى الحطّة حيّة (حلقة ذهاب-إياب لآخر لحظة)
    ============================================================ */
-const WEDDING_CONFIG = (typeof window !== "undefined" && window.__INVITE__ && window.__INVITE__.config) || {
-  groom: "محمد", bride: "زينب",
-  date: "2026-11-20T19:00:00",
-  dateText: "يوم الجمعة، ٢٠ تشرين الثاني ٢٠٢٦",
-  timeText: "الساعة السابعة مساءً",
-  heroSub: "بكم يكتملُ الفرح… وبحضوركم تحلو الحكاية",
-  verse: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
-  invitationText: "أطلقنا هديلَنا الأبيض يزفُّ البشارة: في حديقةٍ يتعانق فيها الوردُ والرخام، وتحت سماءٍ صافيةٍ كقلوبنا، نحتفل بإذن الله بأجمل ليالي العمر. كونوا شهودَ فرحتنا — فبحضوركم تكتمل البهجة، وبدعائكم تدوم.",
-  groomParents: "السيّد كريم عبد الله والسيّدة هدى",
-  brideParents: "السيّد سامي حسن والسيّدة رنا",
-  venueName: "قاعة بابل الكبرى", venueAddr: "بغداد — المنصور",
-  mapUrl: "https://www.google.com/maps/search/?api=1&query=Babylon+Hotel+Baghdad",
-  program: [
-    { time: "٧:٠٠ مساءً", title: "استقبال الضيوف" },
-    { time: "٧:٣٠ مساءً", title: "عقد القران" },
-    { time: "٩:٠٠ مساءً", title: "العشاء" },
-    { time: "١٠:٠٠ مساءً", title: "السهرة" },
-  ],
-  notes: ["يُرجى الحضور قبل الموعد بنصف ساعة", "الدعوة تشمل حاملها والعائلة الكريمة"],
-  closingNote: "حضوركم هديلُ فرحتنا… وتمامُ بهجتنا",
-  hashtag: "#محمد_وزينب",
-  contactLabel: "للتواصل والتأكيد", contactName: "أبو محمد", contactPhone: "+9647700000000",
-  closingFamilies: "عائلة عبد الله  &  عائلة حسن",
-  images: {},
-};
+const WEDDING_CONFIG = (typeof window !== "undefined" && window.__INVITE__ && window.__INVITE__.config) || {};
 
 function byId(id) { return document.getElementById(id); }
 function setText(id, v) { const el = byId(id); if (el && v != null) el.textContent = v; }
